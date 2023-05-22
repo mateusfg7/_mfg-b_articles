@@ -1,10 +1,11 @@
 ---
-title: 'Typed Props on Styled Components'
-date: '2021-07-01'
-description: 'Use typed props with styled-compoents and typescript'
-category: 'styled-components'
-tags: 'ux, ui, styles, typing'
-author: 'mateusfg7'
+title: "Typed Props on Styled Components"
+date: "2021-07-01"
+description: "Use typed props with styled-compoents and typescript"
+category: "styled-components"
+tags: "ux, ui, styles, typing"
+author: "mateusfg7"
+status: "published"
 ---
 
 # How
@@ -13,16 +14,16 @@ Just create a interface and add the type with the property read only. After, add
 
 ```typescript
 interface Props {
-  readonly color: string
+  readonly color: string;
 }
 
 const Text = styled.h1<Props>`
-  color: ${props => props.color};
-`
+  color: ${(props) => props.color};
+`;
 
-const Component = () => <Text color="white">Title</Text>
+const Component = () => <Text color="white">Title</Text>;
 
-export default Component
+export default Component;
 ```
 
 ---
