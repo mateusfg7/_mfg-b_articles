@@ -1,0 +1,31 @@
+---
+title: 'Colocation'
+date: '2023-05-31'
+description: 'Todos nós queremos ter bases de código fáceis de manter, então começamos com a melhor das intenções para tornar nossa base de código sustentável e fácil de entender. Com o tempo, à medida que uma base de código cresce, pode se tornar cada vez mais difícil gerenciar dependências...'
+category: 'Article'
+tags: 'management, patterns, programming, structure, architecture, codebase'
+author: 'mateusfg7'
+status: 'draft'
+---
+
+# Introdução
+
+> Esta é uma tradução da postagem original [Colocation](https://kentcdodds.com/blog/colocation) de [Kent C. Dodds](https://kentcdodds.com/).
+>
+> A tradução foi feita inteiramente pelo **Google Tradutor**, dito isso, podem ocorrer sérios erros de sentido!
+
+Todos nós queremos ter bases de código fáceis de manter, então começamos com a melhor das intenções para tornar nossa base de código (ou nosso canto da base de código) sustentável e fácil de entender. Com o tempo, à medida que uma base de código cresce, pode se tornar cada vez mais difícil gerenciar dependências (JS, CSS, imagens, etc.). À medida que os projetos crescem, uma quantidade crescente de sua base de código se torna "conhecimento tribal" (conhecimento do qual apenas você ou alguns outros têm acesso) e esse tipo de conhecimento contribui para a "dívida técnica" (seja esse termo preciso [ou não](https://twitter.com/ryanflorence/status/747983065738153985)).
+
+Eu gosto de manter minhas bases de código gerenciáveis não apenas para mim (aquele que o escreveu), mas também para meus colegas de equipe, futuros mantenedores e para mim mesmo em 6 meses. Acho que todos podemos concordar que esse é um grande ideal pelo qual devemos nos esforçar em nossas bases de código. Existem muitas ferramentas e técnicas diferentes à nossa disposição para realizar isso.
+
+# Vamos falar sobre comentários de código
+
+Não quero discutir se deve comentar seu código (você deveria) e sobre o que seus comentários devem ser (você explica por que está fazendo algo inesperado nos comentários para que as pessoas que vêm depois possam entender as decisões que foram tomadas que resultaram em o código inesperado ou estranho). (Ok, talvez eu queira falar um pouco sobre isso). Em vez disso, quero me concentrar em onde esses comentários de código são colocados. Geralmente "co-localizamos" esses comentários com o código que eles estão explicando, colocando-os o mais próximo possível do código relevante.
+
+Considere por um minuto, se fizéssemos isso de forma diferente. E se colocarmos esses comentários em um arquivo totalmente separado. Um enorme arquivo `DOCUMENTATION.md` ou talvez até mesmo um diretório `docs/` que mapeia de volta para o nosso diretório `src/`. Parece divertido para você? Sim, para mim também não. Haveria alguns problemas sérios que encontraríamos ao não co-localizar nossos comentários com o código que está explicando.
+
+- **Manutenibilidade**: eles ficariam fora de sincronia ou desatualizados mais rapidamente (do que já estão). Moveríamos ou excluiríamos um arquivo `src/` sem atualizar o arquivo `docs/` correspondente.
+- **Aplicabilidade**: as pessoas que olham para o código em `src/` podem perder um comentário importante em `docs/` ou não comentar seu próprio código porque não percebem que existe um arquivo `docs/` para o arquivo `src/` que estão editando.
+- **Facilidade de uso**: a troca de contexto de um local para outro também seria um desafio com esse tipo de configuração. Ter que lidar com vários locais para arquivos pode tornar difícil garantir que você tenha tudo o que precisa para manter um componente.
+
+Definitivamente, poderíamos criar uma convenção para esse tipo de estilo de comentário de código, mas por que iríamos querer? Não é mais simples manter os comentários co-localizados com o código que estão explicando?
