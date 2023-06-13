@@ -36,29 +36,29 @@ In summary, a swap file is generally recommended for most users due to its flexi
 O btrf só comessou a suportar a utilização de swap files apartir do kernel 5.0.0, e exige alguns comandos extras:
 
 Primeiro vamos criar um diretório _"non-snapshotted"_ na raiz do sistema, onde estará nossos swap files
-```bash
+```console
 # btrfs subvolume create /swap 
 ```
 
 Agora vamos criar o swap file em si, com o comando próprio do btrfs, já passando o tamanho que queremos alocar:
-```bash
+```console
 # btrfs filesystem mkswapfile --size 10g --uuid clear /swap/swapfile_00
 ```
 _note em que estou criando um arquivo de **10 gigabytes** em `10g`, mas você pode passar o tamanho que quiser. Se `--size` for omitido, será criado um arquivo de 2GiB por padrão._
 
 Depois de criado, vamos ativar o swap file com o comando padrão `swapon`:
-```bash
+```console
 # swapon /swap/swapfile
 ```
 
 Para vermos se o swap que criamos está ativado. basta rodar o comando:
-```bash
+```console
 # sudo swapon --show
 ```
 !> **TODO** _add image of `swapon` output_
 
 Com o swap file criado e ativado, basta adicionarmos a configuração no arquivo `fstab` para que o sistema use-o automaticamente quado reiniciar:
-```fstab title="/etc/fstab"
+```bash title="/etc/fstab"
 # ...other configs
 /swap/swapfile none swap defaults 0 0
 ```
