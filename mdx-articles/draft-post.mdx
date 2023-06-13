@@ -201,6 +201,20 @@ fn main() {
   println!("Hello World");
 }
 ```
+_another_ Rust,_but with caption_
+
+```rust caption="This is a caption with some note about the code"
+fn factorial(i: u64) -> u64 {
+  match i {
+    0 => 1,
+    n => n * factorial(n-1)
+  }
+}
+
+fn main() {
+  println!("Hello World");
+}
+```
 
 Go Lang
 
@@ -213,7 +227,7 @@ func (addr ipv4addr) ZeroBroadcast() bool {
 
 Rust complete code features
 
-```rust showLineNumbers title="src/main.rs" /factorial(n-1)/ {9}
+```rust showLineNumbers title="src/main.rs" caption="the code above return the factorial of an given number" /factorial(n-1)/ {9}
 fn factorial(i: u64) -> u64 {
   match i {
     0 => 1,
