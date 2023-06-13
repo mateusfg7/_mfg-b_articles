@@ -1,0 +1,78 @@
+---
+title: 'Swap'
+date: '2023-06-13'
+description: 'Oque é swap e como cria-lo'
+category: 'How To'
+tags: 'linux, swap, disk, memory, brtfs'
+author: 'mateusfg7'
+status: 'draft'
+---
+
+# O que é
+
+# Tipos
+
+!> **TODO** _translate Chat GTP-3 reponse bellow_
+
+Whether a swap file or swap partition is better depends on your specific needs and system configuration. Here are some factors to consider:
+
+    Flexibility: Swap files offer more flexibility compared to swap partitions. With swap files, you can easily create, resize, or remove them without modifying your disk partition layout. This flexibility can be advantageous, especially if you have limited disk space or if your swap requirements may vary over time.
+
+    Ease of setup: Creating a swap file is generally easier and more straightforward than creating a separate swap partition. With a swap file, you can simply allocate space within an existing filesystem without the need to repartition your disk.
+
+    Performance: Historically, swap partitions were considered to have slightly better performance compared to swap files. However, with modern file systems and disk I/O optimizations, the performance difference between swap files and swap partitions is minimal in most scenarios. The impact on performance is generally negligible unless you have specific workload requirements that demand optimal disk I/O.
+
+    Hibernation support: If you intend to use hibernation (suspend-to-disk) on your system, a swap partition is typically required. Hibernation saves the entire system state to disk, including the contents of the swap partition. In this case, you'll need a swap partition that matches or exceeds your system's RAM size.
+
+    System upgrades and changes: If you plan to perform system upgrades or disk partition modifications, having a swap file can be advantageous. It allows you to resize or delete the swap file as needed, without affecting your disk partition layout.
+
+In summary, a swap file is generally recommended for most users due to its flexibility, ease of setup, and the ability to adjust its size easily. However, if you require hibernation support or have specific performance requirements, a swap partition may be more suitable.
+
+# Como criar
+## Swap partition
+## Swap File
+### Btrfs
+
+O btrf só comessou a suportar a utilização de swap files apartir do kernel 5.0.0, e exige alguns comandos extras:
+
+Primeiro vamos criar um diretório _"non-snapshotted"_ na raiz do sistema, onde estará nossos swap files
+```bash
+# btrfs subvolume create /swap 
+```
+
+Agora vamos criar o swap file em si, com o comando próprio do btrfs, já passando o tamanho que queremos alocar:
+```bash
+# btrfs filesystem mkswapfile --size 10g --uuid clear /swap/swapfile_00
+```
+_note em que estou criando um arquivo de **10 gigabytes** em `10g`, mas você pode passar o tamanho que quiser. Se `--size` for omitido, será criado um arquivo de 2GiB por padrão._
+
+Depois de criado, vamos ativar o swap file com o comando padrão `swapon`:
+```bash
+# swapon /swap/swapfile
+```
+
+Para vermos se o swap que criamos está ativado. basta rodar o comando:
+```bash
+# sudo swapon --show
+```
+!> **TODO** _add image of `swapon` output_
+
+Com o swap file criado e ativado, basta adicionarmos a configuração no arquivo `fstab` para que o sistema use-o automaticamente quado reiniciar:
+```fstab title="/etc/fstab"
+# ...other configs
+/swap/swapfile none swap defaults 0 0
+```
+
+---
+
+# Referências
+
+How to Create a Linux Swap File: [https://phoenixnap.com/kb/linux-swap-file](https://phoenixnap.com/kb/linux-swap-file) [[_archive_](https://web.archive.org/web/20230613132919/https://phoenixnap.com/kb/linux-swap-file)]
+
+Create a Linux Swap File: [https://linuxize.com/post/create-a-linux-swap-file/](https://linuxize.com/post/create-a-linux-swap-file/) [[_archive_](https://web.archive.org/web/20230613133106/https://linuxize.com/post/create-a-linux-swap-file/)]
+
+Swap file vs swap partition ? when to use what ? any disadvantages or advantage …: [https://kodekloud.com/community/t/swap-file-vs-swap-partition-when-to-use-what-any-disadvantages-or-advantage/146383](https://kodekloud.com/community/t/swap-file-vs-swap-partition-when-to-use-what-any-disadvantages-or-advantage/146383) [[_archive_](https://web.archive.org/web/20230613133939/https://kodekloud.com/community/t/swap-file-vs-swap-partition-when-to-use-what-any-disadvantages-or-advantage/146383)]
+
+Btrfs - ArchWiki: [https://wiki.archlinux.org/title/Btrfs#Swap_file](https://wiki.archlinux.org/title/Btrfs#Swap_file) [[_archive_](https://web.archive.org/web/20230613134129/https://wiki.archlinux.org/title/Btrfs)]
+
+btrfs(5) - Arch manual pages: [https://man.archlinux.org/man/btrfs.5#SWAPFILE_SUPPORT](https://man.archlinux.org/man/btrfs.5#SWAPFILE_SUPPORT) [[_archive_](https://web.archive.org/web/20230613134710/https://man.archlinux.org/man/btrfs.5)]
