@@ -1,37 +1,22 @@
 ---
-title: 'Swap'
+title: 'Swap em sistemas BTRFS'
 date: '2023-06-13'
-description: 'Oque é swap e como cria-lo'
+description: 'Como criar um swap file em arquivos btrfs'
 category: 'How To'
 tags: 'linux, swap, disk, memory, brtfs'
 author: 'mateusfg7'
 status: 'draft'
 ---
 
-# O que é
+# Introdução
 
-# Tipos
+O Linux divide sua RAM física (memória de acesso aleatório) em pedaços de memória chamados páginas. _Swapping_, ou troca, é o processo pelo qual uma página de memória é copiada para o espaço pré-configurado no disco rígido, chamado espaço swap ou espaço de troca ou swap space, para liberar essa página de memória. Os tamanhos combinados da memória física e do espaço swap são a quantidade de memória virtual disponível.
 
-!> **TODO** _translate Chat GTP-3 reponse bellow_
+Os usuários podem criar um espaço swap durante a instalação ou em qualquer momento posterior, conforme desejado. O espaço swap pode ser usado para duas finalidades, estender a memória virtual além da memória física instalada (RAM), também conhecido como "ativar swap", e também para suporte de suspensão para disco. 
 
-Whether a swap file or swap partition is better depends on your specific needs and system configuration. Here are some factors to consider:
+Veja [esse artigo](https://wiki.archlinux.org/title/Swap_(Português)) no Arch Wiki para informações mais detalhadas.
 
-    Flexibility: Swap files offer more flexibility compared to swap partitions. With swap files, you can easily create, resize, or remove them without modifying your disk partition layout. This flexibility can be advantageous, especially if you have limited disk space or if your swap requirements may vary over time.
-
-    Ease of setup: Creating a swap file is generally easier and more straightforward than creating a separate swap partition. With a swap file, you can simply allocate space within an existing filesystem without the need to repartition your disk.
-
-    Performance: Historically, swap partitions were considered to have slightly better performance compared to swap files. However, with modern file systems and disk I/O optimizations, the performance difference between swap files and swap partitions is minimal in most scenarios. The impact on performance is generally negligible unless you have specific workload requirements that demand optimal disk I/O.
-
-    Hibernation support: If you intend to use hibernation (suspend-to-disk) on your system, a swap partition is typically required. Hibernation saves the entire system state to disk, including the contents of the swap partition. In this case, you'll need a swap partition that matches or exceeds your system's RAM size.
-
-    System upgrades and changes: If you plan to perform system upgrades or disk partition modifications, having a swap file can be advantageous. It allows you to resize or delete the swap file as needed, without affecting your disk partition layout.
-
-In summary, a swap file is generally recommended for most users due to its flexibility, ease of setup, and the ability to adjust its size easily. However, if you require hibernation support or have specific performance requirements, a swap partition may be more suitable.
-
-# Como criar
-## Swap partition
-## Swap File
-### Btrfs
+# How To
 
 O btrf só comessou a suportar a utilização de swap files apartir do kernel 5.0.0, e exige alguns comandos extras:
 
@@ -75,3 +60,5 @@ Swap file vs swap partition ? when to use what ? any disadvantages or advantage 
 Btrfs - ArchWiki: [https://wiki.archlinux.org/title/Btrfs#Swap_file](https://wiki.archlinux.org/title/Btrfs#Swap_file) [[_archive_](https://web.archive.org/web/20230613134129/https://wiki.archlinux.org/title/Btrfs)]
 
 btrfs(5) - Arch manual pages: [https://man.archlinux.org/man/btrfs.5#SWAPFILE_SUPPORT](https://man.archlinux.org/man/btrfs.5#SWAPFILE_SUPPORT) [[_archive_](https://web.archive.org/web/20230613134710/https://man.archlinux.org/man/btrfs.5)]
+
+Swap (Português): [https://wiki.archlinux.org/title/Swap_(Portugu%C3%AAs)](https://wiki.archlinux.org/title/Swap_(Portugu%C3%AAs)) [[_archive_](https://web.archive.org/web/20230616141949/https://wiki.archlinux.org/title/Swap_%28Portugu%C3%AAs%29)]
