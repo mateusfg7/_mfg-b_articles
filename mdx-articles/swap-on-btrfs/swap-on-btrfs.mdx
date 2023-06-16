@@ -5,7 +5,7 @@ description: 'Como criar um swap file em arquivos btrfs'
 category: 'How To'
 tags: 'linux, swap, disk, memory, brtfs'
 author: 'mateusfg7'
-status: 'draft'
+status: 'published'
 ---
 
 # Introdução
@@ -40,7 +40,7 @@ Para vermos se o swap que criamos está ativado. basta rodar o comando:
 ```console
 sudo swapon --show
 ```
-!> **TODO** _add image of `swapon` output_
+![screenshot_1.png](https://i.ibb.co/D8QCDJk/screenshot-1.png)
 
 Com o swap file criado e ativado, basta adicionarmos a configuração no arquivo `fstab` para que o sistema use-o automaticamente quado reiniciar:
 ```bash title="/etc/fstab"
