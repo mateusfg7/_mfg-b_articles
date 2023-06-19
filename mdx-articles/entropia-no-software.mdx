@@ -1,11 +1,11 @@
 ---
 title: 'Entropia no software e a teoria da Janela Quebrada'
-date: '2023-06-18'
+date: '2023-06-19'
 description: 'Salvando o artigo "Entropia no software e a teoria da janela quebrada: Como afeta seu dia a dia?" de Rafael dos Santos Miguel Filho.'
 category: 'Article'
 tags: 'programming, management, architecture, filosofia, Clean Code, structure, productivity, project, archive'
 author: 'mateusfg7'
-status: 'draft'
+status: 'published'
 ---
 
 
@@ -35,7 +35,7 @@ Agora que entendemos rapidamente o que é entropia, vamos entender alguns pontos
 
 Vou compartilhar com você uma história que, apesar de fictícia, poderia facilmente se passar na realidade de muitas equipes de desenvolvimento de software. Prometo que é uma história com uma lição valiosa para todos nós: programadores, gerentes de projeto, product owners e qualquer um interessado em construir produtos de software de sucesso.
 
-> Pense em uma startup inovadora que está desenvolvendo um aplicativo de entrega de alimentos. Entre os muitos recursos desse aplicativo, surge um requisito especial: a opção de os usuários compartilharem um pedido com amigos, permitindo que todos adicionem seus itens preferidos à mesma ordem. Isso parece um diferencial competitivo incrível, não é mesmo?
+Pense em uma startup inovadora que está desenvolvendo um aplicativo de entrega de alimentos. Entre os muitos recursos desse aplicativo, surge um requisito especial: a opção de os usuários compartilharem um pedido com amigos, permitindo que todos adicionem seus itens preferidos à mesma ordem. Isso parece um diferencial competitivo incrível, não é mesmo?
 
 No entanto, a descrição desse requisito é um pouco vaga e não entra em detalhes sobre como essa funcionalidade deve ser implementada. Deve existir um limite de usuários por pedido compartilhado? Como lidar com a divisão dos custos de entrega?
 
@@ -82,4 +82,84 @@ A situação descrita acima contribui significativamente para a alta entropia do
 
 Esses fatores combinados aumentam a "desordem" ou entropia dentro do projeto de software. Eles criam uma situação onde a complexidade e a confusão dominam, dificultando a implementação de melhorias e correções. É por isso que a boa comunicação é tão crucial!
 
+# Mudanças frequentes nos requisitos!
 
+Imagino que você já tenha se deparado com uma situação onde os requisitos para um software mudam constantemente, certo? Isso pode ser um grande desafio. Tais mudanças podem incluir novas funcionalidades, requisitos e processos que não foram considerados inicialmente. E o que isso causa? Aumento na complexidade do software, introdução de bugs e dificuldade para manter e evoluir o sistema.
+
+Para ilustrar, vamos imaginar um programador desenvolvendo um software de gerenciamento de estoque. Durante o desenvolvimento, os requisitos estão em constante mudança: novos tipos de produtos são introduzidos, regras de desconto são alteradas e as informações dos produtos são variadas. Essa constante adaptação às mudanças pode resultar em uma arquitetura de software incerta e em constante fluxo.
+
+Essa falta de estabilidade e clareza aumenta a entropia dentro do software. A fase de planejamento parece nunca chegar a uma conclusão definitiva, enquanto a lista de requisitos cresce e se transforma. A adição de caminhos de código desnecessários ou redundantes, em resposta a essas mudanças frequentes, pode levar a uma complexidade ainda maior, dificultando a compreensão do código e sua manutenção.
+
+Além disso, com cada nova mudança, há um risco maior de introduzir bugs e falhas no software. Afinal, cada alteração requer uma revisão cuidadosa e testes completos para garantir que não está introduzindo novos problemas. Infelizmente, com prazos apertados e requisitos mal definidos, essa etapa crucial pode ser negligenciada, o que só aumenta a entropia do sistema.
+
+Por fim, o que isso tudo tem a ver com o código que escrevemos? Bem, tudo! Quanto mais complexo o sistema se torna, mais difícil é para nós, desenvolvedores, entender e manter o código. Vamos conversar mais sobre esse assunto.
+
+# O código indesejado
+
+A falta de diálogo entre as equipes, a falta de especificações claras e as mudanças frequentes nos requisitos podem impactar negativamente a forma como escrevemos código de várias maneiras:
+
+Vamos começar com o **Código inconsistente**. Imagine uma equipe de desenvolvedores trabalhando em um projeto, mas com uma comunicação precária entre si. Isso pode resultar em diferentes interpretações dos requisitos e, portanto, inconsistências no código.
+
+Agora, pense no **Código mal mantido**. Especificações nebulosas e mudanças constantes podem levar a um emaranhado de código "sujo", semelhante a um prédio mal conservado, que se torna cada vez mais difícil de manter.
+
+Em seguida, temos os chamados "**cheiros de código**". Pense que está andando por uma rua e sente um odor desagradável. É um sinal de que algo não está limpo. No nosso código, os famosos [_code smells_](https://refactoring.guru/refactoring/smells), são aspectos que sugerem **problemas potenciais de qualidade ou design**, geralmente provocados por mudanças frequentes nos requisitos ou até mesmo falta de experiencia dos programadores, falta de adoção de boas práticas entre outros fatores ligados a legibilidade do código.
+
+**Código redundante** também é um problema. Sem especificações claras, podemos encontrar partes do código repetidas, aumentando a complexidade e o tempo de manutenção, principalmente pela falta de clareza e adoção do princípio [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
+
+E quanto ao **aumento de bugs**? Isso pode ocorrer quando há falhas de comunicação e as especificações não são compreendidas corretamente. Mas principalmente ocorrem pela **ausência de testes automatizados** para validar os comportamentos que são esperados pelo software.
+
+_**Como muitos lidam com esses problemas citados, quando se tornam insustentáveis?**_
+
+Os desenvolvedores podem considerar refatorações significativas ou, em casos extremos, reescrever o software do zero. **Mas atenção, essas são medidas de curto prazo**. Se a equipe não adotar um **plano consistente para controlar a entropia futura**, a deterioração do código retornará. Mas o que tudo isso tem a ver com a teoria da janela quebrada?
+
+# A teoria da janela quebrada
+
+No livro [_**The Pragmatic Programmer**_](https://www.amazon.com.br/Pragmatic-Programmer-journey-mastery-Anniversary/dp/0135957052), os autores argumentam que a entropia do software é contagiosa e, se não for controlada, torna-se uma epidemia. Além disso, fazem uma analogia com a teoria da janela quebrada. Vamos estudar isso mais afundo.
+
+Proposta pelos criminologistas [_**James Wilson e George Kelling**_](https://www.britannica.com/topic/broken-windows-theory) e tendo um enorme impacto na política policial durante a década de 1990, a teoria das janelas quebradas é uma ideia que sugere que a desordem física em um ambiente urbano, como pichações e vidraças quebradas, pode levar a um aumento da criminalidade naquela área ou degradação por vândalos no local.
+
+Bom, você deve estar se perguntando, "Mas o que isso tem a ver com a entropia em software?" A resposta é: muito mais do que você imagina!
+
+Considere um código com inconsistências, redundâncias, bugs ou mesmo code smells. Cada um desses elementos pode ser visto como uma "janela quebrada" na engenharia de software. Deixá-los sem solução, ou pior, **permitir que se acumulem**, gera uma crescente desordem - ou seja, a entropia do software. Essa alta entropia faz com que o código se torne cada vez mais difícil de manter, entender e evoluir.
+
+De maneira similar à [_Teoria da Janela Quebrada_](https://www.britannica.com/topic/broken-windows-theory), um código mal cuidado e desorganizado pode incentivar práticas ruins de programação. Imagine que um novo membro da equipe se depara com um código repleto de inconsistências e bugs. Se não houver um esforço consciente para manter a qualidade do código, esse novo membro pode ser levado a pensar: "_Se o código já está nesse estado, por que eu deveria me esforçar para escrever um código de qualidade?_".
+
+**A consequência é um ciclo vicioso, onde a qualidade do software se deteriora, a produtividade diminui, os bugs aumentam e a entropia se torna incontrolável**. Assim como em uma casa de bairro onde as janelas quebradas não são consertadas, a desordem acaba por tomar conta.
+
+Podemos acrescentar ainda mais, códigos confusos sem documentação e **testes inadequados podem indicar aos desenvolvedores e gerentes de projeto que a qualidade não é uma prioridade, levando a comportamentos e decisões inadequadas para o contexto**. Isso pode incluir a adição de novos recursos sem levar em conta a manutenção, omitir refatorações necessárias e não monitorar a qualidade do código. Esses comportamentos inadequados podem levar a um efeito dominó de problemas, onde a entropia do código aumenta gradualmente.
+
+> A relação entre a Teoria da Janela Quebrada e a entropia é esta: ambos são formas de entender a importância da manutenção contínua e do cuidado com os detalhes. Tanto em uma cidade quanto em um sistema de software, a desordem se instala quando permitimos que pequenos problemas se acumulem. E a maneira de combater isso é através do cuidado constante, da manutenção regular e da atenção aos detalhes.
+
+# Como tratar esse problema grave?
+
+A _primeira_ coisa a se ter em mente é que **qualidade e manutenção não são aspectos a serem considerados apenas no final** de um projeto - eles devem estar presentes desde o início. Pare de pensar que testes e refatorações são perdas de tempo!
+
+_Segundo_, **mantenha a comunicação**. Parece simples, mas é crucial. É necessário que _**todos**_ os membros da equipe, sejam desenvolvedores, gerentes, proprietários de produtos ou outras partes interessadas, estejam alinhados em termos de requisitos, prazos e objetivos. Dessa forma, podemos reduzir mal-entendidos e evitar inconsistências que contribuem para a entropia.
+
+_Terceiro_, **ter uma política de código limpo e seguir as melhores práticas de codificação**. Aqui entram padrões de codificação consistentes, revisões de código, testes automatizados e uma atitude proativa em relação à refatoração. Não se trata apenas de escrever código que funciona, mas de escrever código que outros possam entender e manter.
+
+_Quarto_, devemos **prestar atenção à arquitetura do nosso software**. Uma arquitetura bem planejada e escalável reduz a probabilidade de termos que realizar mudanças drásticas no futuro, que podem introduzir novos bugs e aumentar a complexidade e a entropia. Uma arquitetura planejada de maneira precipitada leva a complexidade desnecessária e a um conflitos de ideias entre desenvolvedores dentro do projeto.
+
+Por fim, **a gestão eficaz das mudanças**. Mudanças _**são inevitáveis**_ em qualquer projeto, mas a maneira como lidamos com elas pode fazer uma grande diferença. Uma abordagem ágil, que encoraja o feedback contínuo e a adaptação, pode ajudar a gerir as mudanças de uma forma que reduza a entropia ao invés de aumentá-la.
+
+Cada janela quebrada que consertamos é um passo na direção certa. Cada bug corrigido, cada inconsistência eliminada, cada "cheiro de código" resolvido contribui para o controle da entropia. E, ao manter a entropia sob controle, garantimos que nosso software seja sustentável, escalável, testável, compreendido e, acima de tudo, um fácil de modificar e trabalhar.
+
+# Como os testes ajudam a manter a entropia sobre controle?
+
+Os testes **continuam sendo uma ferramenta subestimada por muitos desenvolvedores na luta contra a alta entropia no software**. Por que? Já tentou montar um quebra-cabeças sem a imagem de referência? Bem, se você já o fez, sabe o quão complicado é montar a imagem. Testes, meus caros leitores, são como essa imagem de referência na construção do nosso grande quebra-cabeças de software. Sem uma imagem clara do sistema, não podemos saber exatamente o que um software faz, ou seja, seu propósito. Seus principais recursos e objetivos. **Testes refletem os comportamentos do software, são um espelho do software, que podemos executar e entender pelo que cada pedaço de código é responsável**!
+
+Os testes de software, unitários, de integração, funcional, de stress, entre outros, têm um papel crucial na prevenção e controle da entropia do software. Como exatamente?
+
+1. **Detectando problemas mais cedo**: Testes bem escritos ajudam a identificar bugs, inconsistências e falhas mais cedo, quando eles são mais fáceis (e mais baratos) de serem corrigidos. Testes automatizados executados regularmente garantem que qualquer "janela quebrada" seja prontamente detectada, evitando a propagação da entropia.
+2. **Prevenindo a regressão**: À medida que o software evolui, é fácil quebrar funcionalidades existentes sem perceber. Com uma suíte de testes abrangente, você tem uma rede de segurança que ajuda a prevenir esses problemas, garantindo que o software continue funcionando como esperado após cada mudança.
+3. **Documentação viva**: Testes são uma espécie de documentação viva do sistema, que descreve como ele deve funcionar. Ao consultar os testes, _**novos membros da equipe ou mesmo desenvolvedores veteranos podem entender melhor o código**_, mantendo a base de código consistente e minimizando a entropia.
+4. **Melhora a qualidade do código**: Testes incentivam os desenvolvedores a escreverem códigos mais modulares e independentes (fáceis de testar), o que por si só já contribui para reduzir a entropia.
+5. **Fornece confiança para refatorar** : Melhorar seu design sem alterar seu comportamento é uma atividade necessária para manter a entropia controlada. Testes fornecem a segurança de que, se algo quebrar durante a refatoração, será prontamente detectado.
+
+No livro que estou escrevendo que pretendo _**anunciar o nome em breve**_, falo sobre esses pontos de uma perspectiva mais prática para a indústria de software. Realmente quando levamos muito a sério os testes, temos ganhos significativos de produtividade no dia a dia ao programar novos recursos e manter os que já existem. Obviamente não é uma tarefa simples, existem desafios e principalmente compromisso com a qualidade.
+
+Em conclusão, a Teoria da Janela Quebrada nos ensina que a tolerância a pequenas falhas ou "janelas quebradas" no nosso código pode levar a uma cascata de problemas. Os desenvolvedores podem começar a achar que é aceitável produzir código de baixa qualidade, ou ignorar os testes, aumentando assim a entropia. Ao abraçar boas práticas e manter um olhar atento para "janelas quebradas", podemos manter a entropia sob controle e assegurar que nossos projetos de software permaneçam saudáveis e sustentáveis.
+
+Novamente, é mais fácil escrever do que colocar em prática, por isso estou centralizando em um livro esse tema para abordar com mais liberdade e profundidade esse assunto tão complexo e interessante que faz parte do nosso cotidiano.
+
+Fico por aqui. Espero que tenham gostado! Muito obrigada pela leitura até o final, espero que as dicas possam ajudar no dia a dia! Até o próximo artigo! 😄🖐️
