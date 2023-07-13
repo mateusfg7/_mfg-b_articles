@@ -14,15 +14,15 @@ I had a component in my website for search through my blog posts, the component 
 
 ![screenshot.png](https://i.imgur.com/J8sk1vb.png)
 
-The modal is triggered by an button that looks like another input search (_but isn't_) with a keyboard shortcut (`Ctrl + K`).
+The modal is triggered by an button that looks like another input search (_but isn't_) with a keyboard shortcut (`Ctrl+K`).
 
-All of this was made using Tailwindcss, Phosphor icons Radix UI and Geist UI (_for the keyboard shortcut_) on Next.js.
+All of this was made using Tailwindcss, Phosphor icons, Radix UI and Geist UI (_for the keyboard shortcut_) on Next.js.
 
-The initial post list is a random list, then, when a search input is detected, a function is called, for get the input and return the matched post. This function is the core of this document.
+The initial post list is a random list, then, when a search input is detected, a function is called, for get the input and return the matched post. This function is the main topic of this post.
 
 I'm dropping this implementation now, for use a more better, modern and complete alternative: The [kbar](https://github.com/timc1/kbar) library.
 
-I will not talk about kbar now, but I prefer to use him instead of my own, pure, implementation of search modal, but I sincerely like my search function, is simple, and precise. I think that there is better search algorithm that will fit better in my use case, but is my first search function, and I want to register/archive my implementation. If you know another search algorith, fell free to share in the comments section bellow, any link, reference, topic... Anything!
+I will not talk about kbar now, but I prefer to use him instead of my own, pure, implementation of search modal, but I sincerely like my search function, is simple, and precise. I think that there is better search algorithm that will fit better in my use case, but is my first search function, and I want to register/archive my implementation. If you know another search algorith, feel free to share in the comments section bellow, any link, reference, topic... Anything!
 
 Well, here is:
 
@@ -60,7 +60,7 @@ prop | type | example
 `author` | String | "Mateus Felipe Gonçalves"
 `category` | String  | "Article"
 `status` | Enum | "Published"
-`gags` | String | "galo, maria, futebol, campeonato mineiro"
+`tags` | String | "galo, maria, futebol, campeonato mineiro"
 
 The `slug` function is just to get a string and return a slugged version of it (e.g. "Clube Atlético Mineiro" to "clube-atletico-mineiro").
 
@@ -68,7 +68,17 @@ The logic is to attach a weight to the post, that represents how close the post 
 
 Implementation: https://github.com/mateusfg7/mateusf.com/blob/7.3.0/src/shared/lib/match.ts
 
-# Observation
+## My mistake
+
+While I was reading my code, I notice that the search isn't case-sensitive, because I transform all to a slug version, and compare this slugged version of the strings.
+
+This ends up decreasing the accuracy of the search, and this "String Processor" it's useless, in fact, it just gets in the way.
+
+I process all the string with the `slug` function because I already had problems with compare string without process on post titles to get the reference of posts, but this it's not the case.
+
+**Moral of the story**:  beware of "muscle memory" of your brain!
+
+# Observation 
 
 I was not honest when I said this is my first search implementation, I made another before, but it not have the concept of _weight_, is just a match script. This script it's self explanatory, so I won't go into details about how it works:
 
